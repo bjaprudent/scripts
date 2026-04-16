@@ -2,10 +2,12 @@
 
 set -euo pipefail
 
-SSH_CONFIG="${SSH_CONFIG:-$HOME/.ssh/config}"
-
 usage() {
-  echo "Usage: $0 <file_to_copy> <remote_path> [host_pattern]"
+  echo "Usage: $0 <file_to_copy> <remote_path> [ssh_config_file] [host_pattern]"
+  echo
+  echo "Example:"
+  echo "  $0 myfile.txt /tmp/"
+  echo "  $0 myfile.txt /tmp/ ~/.ssh/myconfig idx"
   exit 1
 }
 
@@ -13,10 +15,16 @@ usage() {
 
 FILE="$1"
 REMOTE_PATH="$2"
-PATTERN="${3:-.*}"
+SSH_CONFIG="${3:-$HOME/.ssh/config}"
+PATTERN="${4:-.*}"
 
 if [[ ! -f "$FILE" ]]; then
   echo "Error: File '$FILE' not found"
+  exit 1
+fi
+
+if [[ ! -f "$SSH_CONFIG" ]]; then
+  echo "Error: SSH config '$SSH_CONFIG' not found"
   exit 1
 fi
 
