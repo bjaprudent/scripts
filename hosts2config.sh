@@ -18,7 +18,7 @@ while IFS= read -r line; do
         hint_host="${BASH_REMATCH[1]}"
         local_port="${BASH_REMATCH[2]}"
         remote_port="${BASH_REMATCH[3]}"
-        FORWARD_HOST[$hint_host]=""          # placeholder; IP resolved below
+        FORWARD_HOST[$hint_host]=""
         FORWARD_PORTS[$hint_host]="$local_port:$remote_port"
     fi
 done < "$HOSTS_FILE"
