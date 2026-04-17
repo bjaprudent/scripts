@@ -1,6 +1,6 @@
 #!/opt/homebrew/bin/bash
 
-# Usage: ./hosts2config.sh [hosts_file] [key_file] > ~/.ssh/config
+# Usage: ./hosts2config.sh <hosts_file> [key_file] > ~/.ssh/config
 
 HOSTS_FILE="$1"
 KEY_FILE="${2:-~/.ssh/bj-general-keys.pem}"
