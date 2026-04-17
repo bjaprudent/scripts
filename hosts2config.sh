@@ -23,7 +23,6 @@ while IFS= read -r line; do
     fi
 done < "$HOSTS_FILE"
 
-# Resolve IPs for forwarded hosts
 declare -A HOST_IP
 while read -r IP HOST; do
     [[ -z "$IP" || -z "$HOST" || "$IP" =~ ^# ]] && continue
@@ -32,7 +31,6 @@ done < "$HOSTS_FILE"
 
 if [[ ${#FORWARD_PORTS[@]} -gt 0 ]]; then
     echo "Host bastion"
-    # Sort by local port for deterministic output
     for hint_host in $(for h in "${!FORWARD_PORTS[@]}"; do
                            echo "${FORWARD_PORTS[$h]%%:*} $h"
                        done | sort -n | awk '{print $2}'); do
